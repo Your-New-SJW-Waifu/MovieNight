@@ -5,6 +5,7 @@ After=network-online.target
 
 [Service]
 User=movienight
+WorkingDirectory=/opt/MovieNight
 ExecStart=/opt/MovieNight/MovieNight
 
 ProtectHome=true
