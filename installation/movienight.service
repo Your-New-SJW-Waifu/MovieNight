@@ -1,0 +1,15 @@
+[Unit]
+Description=MovieNight RTSP server
+Requires=network-online.target
+After=network-online.target
+
+[Service]
+User=movienight
+ExecStart=/opt/MovieNight/MovieNight
+
+ProtectHome=true
+ProtectSystem=full
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target
