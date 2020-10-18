@@ -36,6 +36,7 @@ type Settings struct {
 	RegenAdminPass     bool   // regenerate admin password on start?
 	RoomAccess         AccessMode
 	RoomAccessPin      string // The current pin
+	RtmpListenAddress  string // host:port that the RTMP server listens on
 	SessionKey         string // key for session data
 	StreamKey          string
 	StreamStats        bool
@@ -102,34 +103,36 @@ func LoadSettings(filename string) (*Settings, error) {
 		}
 	}
 
+	// Set to -1 to reset
 	if s.RateLimitChat == -1 {
-		s.RateLimitChat = 0
-	} else if s.RateLimitChat <= 0 {
 		s.RateLimitChat = 1
+	} else if s.RateLimitChat < 0 {
+		s.RateLimitChat = 0
 	}
 
 	if s.RateLimitNick == -1 {
-		s.RateLimitNick = 0
-	} else if s.RateLimitNick <= 0 {
 		s.RateLimitNick = 300
+	} else if s.RateLimitNick < 0 {
+		s.RateLimitNick = 0
 	}
 
 	if s.RateLimitColor == -1 {
-		s.RateLimitColor = 0
-	} else if s.RateLimitColor <= 0 {
 		s.RateLimitColor = 60
+	} else if s.RateLimitColor < 0 {
+		s.RateLimitColor = 0
 	}
 
 	if s.RateLimitAuth == -1 {
-		s.RateLimitAuth = 0
-	} else if s.RateLimitAuth <= 0 {
 		s.RateLimitAuth = 5
+	} else if s.RateLimitAuth < 0 {
+		common.LogInfoln("It's not recommended to disable the authentication rate limit.")
+		s.RateLimitAuth = 0
 	}
 
 	if s.RateLimitDuplicate == -1 {
-		s.RateLimitDuplicate = 0
-	} else if s.RateLimitDuplicate <= 0 {
 		s.RateLimitDuplicate = 30
+	} else if s.RateLimitDuplicate < 0 {
+		s.RateLimitDuplicate = 0
 	}
 
 	if s.WrappedEmotesOnly {

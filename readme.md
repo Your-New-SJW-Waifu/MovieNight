@@ -30,7 +30,7 @@ online.
 ### Older Go Versions
 
 You can install a newer version of Go alongside your OS's distribution by
-following the guide here: [https://golang.org/doc/install#extra_versions](https://golang.org/doc/install#extra_versions)
+following the guide here: [https://golang.org/doc/manage-install](https://golang.org/doc/manage-install)
 
 Once you have that setup add an enviromnent variable named `GO_VERSION` and
 set it to the version you installed (eg, `1.14.1`).  The Makefile will now use
@@ -117,10 +117,14 @@ at startup:
 
 ```text
 Usage of .\MovieNight.exe:
+  -e bool
+        Whether or not to download approved emotes on startup (default "false")
   -k string
-        Stream key, to protect your stream
+        Stream key, to protect your stream (default: "")
   -l string
         host:port of the MovieNight (default ":8089")
+  -r string
+        host:port of the RTMP server (default ":1935")
 ```
 
 ## Configuration
@@ -162,3 +166,7 @@ MovieNight’s configuration is controlled by `settings.json`:
   duplicate message.
 - `NoCache`: if true, set `Cache-Control: no-cache, must-revalidate` in the HTTP
   header, to prevent caching responses.
+
+## License
+
+`flv.js` is Licensed under the Apache 2.0 license.  This project is licened under the MIT license.
